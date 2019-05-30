@@ -1,1 +1,4 @@
-# sudoku
+# Sudoku
+
+## Install
+* gem install colorize
