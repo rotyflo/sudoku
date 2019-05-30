@@ -1,3 +1,5 @@
+require "colorize"
+
 class Tile
   attr_reader :given
   attr_accessor :val
@@ -9,5 +11,9 @@ class Tile
 
   def ==(val)
     @val == val
+  end
+
+  def colorize(color)
+    @val.colorize(color)
   end
 end

@@ -1,5 +1,4 @@
 require_relative "tile"
-require "colorize"
 
 class Board
   attr_reader :grid
@@ -44,14 +43,24 @@ class Board
 
   def render
     system("clear")
-    @grid.each do |row|
-      readable_row = row.map do |tile|
-        if tile == "0"
-          "-"
-        elsif tile.given
-          tile.val.colorize(:red)
-        else
-          tile.val
+    @grid.each_with_index do |row, i|
+      if @solved_rows.include?(i)
+        readable_row = row.map do |tile|
+          if tile.given
+            tile.colorize(:red)
+          else
+            tile.colorize(:green)
+          end
+        end
+      else
+        readable_row = row.map do |tile|
+          if tile == "0"
+            "-"
+          elsif tile.given
+            tile.colorize(:red)
+          else
+            tile.val
+          end
         end
       end
       print readable_row.join(" ")
@@ -60,8 +69,26 @@ class Board
   end
 
   def solved?
-    row_solved?
-    col_solved?
-    reg_solved?
+    @solved_rows, @solved_cols, @solved_regs = [], [], []
+    row_solved? && col_solved? && reg_solved?
+  end
+
+  def row_solved?
+    @grid.each_with_index do |row, i|
+      solved = (1..9).all? do |num|
+        row.any? { |tile| tile == num.to_s }
+      end
+      if solved
+        @solved_rows << i
+      end
+    end
+  end
+
+  def col_solved?
+
+  end
+
+  def reg_solved?
+
   end
 end

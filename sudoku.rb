@@ -8,7 +8,7 @@ class Sudoku
   end
 
   def play
-    while !solved?
+    while !@board.solved?
       @board.render
       val = get_val
       pos = get_pos
@@ -20,10 +20,6 @@ class Sudoku
         @board[pos] = val
       end
     end
-  end
-
-  def solved?
-    @board.grid == @solution
   end
 
   def get_val
@@ -49,13 +45,13 @@ class Sudoku
       pos = nil if pos.length != 2
     end
 
-    pos.split("").map { |char| char.to_i }
+    pos.split("").map { |char| char.to_i - 1 }
   end
 
   def valid?(input)
     return false if input == nil
 
-    input.split("").all? { |char| "1234567890".include?(char) }
+    input.split("").all? { |char| "123456789".include?(char) }
   end
 end
 
