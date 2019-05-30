@@ -1,10 +1,13 @@
 class Tile
-  def initialize(val)
+  attr_reader :given
+  attr_accessor :val
+
+  def initialize(val, given)
     @val = val
-    @given = false
+    @given = given
   end
 
-  def to_s
-
+  def ==(val)
+    @val == val
   end
 end

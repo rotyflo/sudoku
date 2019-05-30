@@ -1,3 +1,4 @@
+require_relative "tile"
 require "colorize"
 
 class Board
@@ -13,7 +14,16 @@ class Board
     
     File.open(file, "r") do |f|
       f.each_line do |line|
-        array << line.chomp.split("")
+        subarr = []
+
+        line.chomp.split("").each do |char|
+          given = true
+          given = false if char == "0"
+
+          subarr << Tile.new(char, given)
+        end
+        
+        array << subarr
       end
     end
 
@@ -23,17 +33,25 @@ class Board
   def []=(pos, val)
     x, y = pos
 
-    @grid[y][x] = val
+    @grid[y][x].val = val
+  end
+
+  def [](pos)
+    x, y = pos
+
+    @grid[y][x]
   end
 
   def render
     system("clear")
     @grid.each do |row|
-      readable_row = row.map do |char|
-        if char == "0"
+      readable_row = row.map do |tile|
+        if tile == "0"
           "-"
-        else 
-          char.colorize(:red)
+        elsif tile.given
+          tile.val.colorize(:red)
+        else
+          tile.val
         end
       end
       print readable_row.join(" ")

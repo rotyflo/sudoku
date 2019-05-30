@@ -12,8 +12,13 @@ class Sudoku
       @board.render
       val = get_val
       pos = get_pos
-     
-      @board[pos] = val
+      
+      if @board[pos].given
+        puts "Cannot change given values"
+        sleep(1)
+      else
+        @board[pos] = val
+      end
     end
   end
 
