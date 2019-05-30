@@ -53,16 +53,19 @@ class Board
           end
         end
       else
-        readable_row = row.map do |tile|
+        readable_row = row.map.with_index do |tile, i|
           if tile == "0"
             "-"
           elsif tile.given
             tile.colorize(:red)
+          elsif @solved_cols.include?(i)
+            tile.colorize(:green)
           else
             tile.val
           end
         end
       end
+
       print readable_row.join(" ")
       puts
     end
@@ -85,7 +88,14 @@ class Board
   end
 
   def col_solved?
-
+    (0..8).each do |i|
+      solved = (1..9).all? do |num|
+        @grid.any? { |row| row[i] == num.to_s }
+      end
+      if solved
+        @solved_cols << i
+      end
+    end
   end
 
   def reg_solved?
