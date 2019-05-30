@@ -24,6 +24,7 @@ class Board
   end
 
   def render
+    system("clear")
     @grid.each do |row|
       readable_row = row.map do |char|
         if char == "0"
