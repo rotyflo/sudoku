@@ -20,11 +20,35 @@ class Sudoku
   end
 
   def get_val
-    gets.chomp
+    val = nil
+
+    while !valid?(val)
+      print "Value: "
+      val = gets.chomp
+
+      val = nil if val.length != 1
+    end
+
+    val
   end
 
   def get_pos
-    gets.chomp
+    pos = nil
+
+    while !valid?(pos)
+      print "Position: "
+      pos = gets.chomp
+
+      pos = nil if pos.length != 2
+    end
+
+    pos.split("").map { |char| char.to_i }
+  end
+
+  def valid?(input)
+    return false if input == nil
+
+    input.split("").all? { |char| "1234567890".include?(char) }
   end
 end
 
