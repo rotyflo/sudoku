@@ -2,6 +2,7 @@ require "colorize"
 
 class Board
   attr_reader :grid
+  attr_writer :grid
 
   def initialize(grid)
     @grid = grid
@@ -19,8 +20,10 @@ class Board
     array
   end
 
-  def place(position)
+  def []=(pos, val)
+    x, y = pos
 
+    @grid[y][x] = val
   end
 
   def render

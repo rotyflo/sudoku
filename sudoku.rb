@@ -12,6 +12,8 @@ class Sudoku
       @board.render
       val = get_val
       pos = get_pos
+     
+      @board[pos] = val
     end
   end
 
