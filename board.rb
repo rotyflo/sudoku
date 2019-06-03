@@ -43,30 +43,23 @@ class Board
 
   def render
     system("clear")
+
     @grid.each do |row|
-      if row_solved?(row)
-        readable_row = row.map do |tile|
-          if tile.given
-            tile.colorize(:red)
-          else
-            tile.colorize(:green)
-          end
-        end
-      else
-        readable_row = row.map.with_index do |tile, i|
-          if tile == "0"
-            "-"
-          elsif tile.given
-            tile.colorize(:red)
-          elsif col_solved?(i)
-            tile.colorize(:green)
-          else
-            tile.val
-          end
+      row_solved = row_solved?(row)
+
+      output = row.map.with_index do |tile, i|
+        if tile == "0"
+          "-"
+        elsif tile.given
+          tile.colorize(:red)
+        elsif row_solved || col_solved?(i)
+          tile.colorize(:green)
+        else
+          tile.val
         end
       end
 
-      print readable_row.join(" ")
+      print output.join(" ")
       puts
     end
   end
