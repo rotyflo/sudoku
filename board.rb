@@ -1,11 +1,12 @@
 require_relative "tile"
 
 class Board
-  attr_reader :grid
-  attr_writer :grid
+  attr_reader :solved
+  attr_accessor :grid
 
   def initialize(grid)
     @grid = grid
+    @solved = false
   end
 
   def self.from_file(file)
@@ -44,15 +45,15 @@ class Board
   def render
     system("clear")
 
-    @grid.each do |row|
+    @grid.each_with_index do |row, y|
       row_solved = row_solved?(row)
 
-      output = row.map.with_index do |tile, i|
+      output = row.map.with_index do |tile, x|
         if tile == "0"
           "-"
         elsif tile.given
           tile.colorize(:red)
-        elsif row_solved || col_solved?(i)
+        elsif row_solved || col_solved?(x) || reg_solved?(x, y)
           tile.colorize(:green)
         else
           tile.val
@@ -65,7 +66,11 @@ class Board
   end
 
   def solved?
-    false
+    (0..8).all? do |y|
+      (0..8).all? do |x|
+        row_solved?(@grid[y]) && col_solved?(x) && reg_solved?(x, y)
+      end
+    end
   end
 
   def row_solved?(row)
@@ -74,13 +79,22 @@ class Board
     end
   end
 
-  def col_solved?(i)
+  def col_solved?(x)
     solved = (1..9).all? do |num|
-      @grid.any? { |row| row[i] == num.to_s }
+      @grid.any? { |row| row[x] == num.to_s }
     end
   end
 
-  def reg_solved?
+  def reg_solved?(x, y)
+    first_x = (x / 3) * 3
+    first_y = (y / 3) * 3
 
+    solved = (1..9).all? do |num|
+      (first_x..first_x + 2).any? do |x_i|
+        (first_y..first_y + 2).any? do |y_i|
+          @grid[x_i][y_i] == num.to_s
+        end
+      end
+    end
   end
 end

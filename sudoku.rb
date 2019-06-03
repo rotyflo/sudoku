@@ -3,7 +3,6 @@ require_relative "tile"
 
 class Sudoku
   def initialize
-    @solution = Board.from_file("puzzles/sudoku1_solved.txt")
     @board = Board.new(Board.from_file("puzzles/sudoku1.txt"))
   end
 
@@ -20,6 +19,8 @@ class Sudoku
         @board[pos] = val
       end
     end
+
+    puts "You win!"
   end
 
   def get_val
