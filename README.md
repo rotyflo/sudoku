@@ -10,15 +10,14 @@
 
 **Step 2:**
 
-if on pre-Catalina OS use:
 ```
+# if on pre-Catalina OS use:
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 source ~/.bashrc
 echo 'source ~/.bashrc' >> ~/.bash_profile
-```
-else use:
-```
+
+# else use:
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
 echo 'eval "$(rbenv init -)"' >> ~/.zshrc
 source ~/.zshrc
