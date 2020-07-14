@@ -52,7 +52,9 @@ which ruby # => /Users/your-username/.rbenv/shims/ruby
 
 
 ## How to use
+
 Value: n
+
 Position: xy
 
 **EXAMPLE**
