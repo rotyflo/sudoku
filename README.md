@@ -8,6 +8,7 @@
 ```brew install rbenv```
 
 **Step 2:**
+
 if on pre-Catalina OS use:
 ```
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
@@ -32,11 +33,16 @@ which ruby # => /Users/your-username/.rbenv/shims/ruby
 ```
 
 ### 1 - Download program
-Download zip file
-Open terminal
-```cd Downloads```
-```unzip sudoku-master.zip```
-```cd sudoku-master```
+
+1. Download zip file
+
+2. Open terminal
+
+3. ```cd Downloads```
+
+4. ```unzip sudoku-master.zip```
+
+5. ```cd sudoku-master```
 
 ### 2 - Install dependencies
 ```gem install colorize```
@@ -50,6 +56,7 @@ Value: n
 Position: xy
 
 **EXAMPLE**
+
 To place a '2' in top right corner:
 ```
 Value: 2
