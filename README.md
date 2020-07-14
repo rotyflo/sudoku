@@ -5,6 +5,7 @@
 ### 0 - Install Ruby (if not yet installed)
 
 **Step 1:**
+
 ```brew install rbenv```
 
 **Step 2:**
